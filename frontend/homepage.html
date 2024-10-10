@@ -92,7 +92,7 @@
 
         async function getAllHomes() {
             try {
-                const response = await fetch('http://localhost:3000/list-homes');
+                const response = await fetch('https://xenon-assignment.onrender.com/list-homes');
                 if (response.ok) {
                     const data = await response.json();
                     allHomes = data; // Store the homes in a global variable
