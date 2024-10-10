@@ -38,8 +38,20 @@
 
         .home-card .price {
             font-size: 1.2rem;
-            color: #007BFF;;
+            color: #007BFF;
             font-weight: bold;
+        }
+
+        /* Search bar styling */
+        #search-bar {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 1rem auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            max-width: 600px;
+            display: block;
         }
     </style>
 </head>
@@ -55,16 +67,11 @@
         <h1>Welcome to the Vacation Rentals Homepage!</h1>
         <p>You are logged in. Enjoy exploring our vacation rentals.</p>
         
+        <!-- Search bar for filtering homes -->
+        <input type="text" id="search-bar" placeholder="Search homes by title...">
+        
         <!-- Container for displaying homes -->
-        <div id="homes-container">
-            <!-- Example card -->
-            <div class="home-card">
-                <img src="https://via.placeholder.com/300" alt="Home Image">
-                <h2>Beautiful Beach House</h2>
-                <p>Enjoy your stay at this beautiful beachfront property.</p>
-                <p class="price">$250 per night</p>
-            </div>
-        </div>
+        <div id="homes-container"></div>
     </div>
 
     <script>
@@ -79,7 +86,66 @@
             localStorage.removeItem('token'); // Remove token from local storage
             window.location.href = 'index.html'; // Redirect to login page
         });
+
+        // Function to get all homes
+        let allHomes = []; // Store homes globally
+
+        async function getAllHomes() {
+            try {
+                const response = await fetch('http://localhost:3000/list-homes');
+                if (response.ok) {
+                    const data = await response.json();
+                    allHomes = data; // Store the homes in a global variable
+                    displayAllHomes(allHomes); // Display all homes on the page
+                } else {
+                    const errorData = await response.json();
+                    alert(errorData.error);
+                    window.location.href = 'homepage.html'; // Redirect to homepage on error
+                }
+            } catch (error) {
+                console.error('Error fetching homes:', error);
+                alert('Error fetching homes. Please try again.');
+            }
+        }
+
+        // Function to display homes on the page
+        function displayAllHomes(homesToDisplay) {
+            const homesContainer = document.getElementById('homes-container');
+            homesContainer.innerHTML = ''; // Clear the container
+
+            homesToDisplay.forEach((home) => {
+                const homeCard = document.createElement('div');
+                homeCard.classList.add('home-card');
+
+                const titleElement = document.createElement('h2');
+                titleElement.textContent = home.title;
+
+                const descriptionElement = document.createElement('p');
+                descriptionElement.textContent = home.description;
+
+                const priceElement = document.createElement('p');
+                priceElement.textContent = `Price: $${home.price}`;
+                priceElement.classList.add('price');
+
+                homeCard.appendChild(titleElement);
+                homeCard.appendChild(descriptionElement);
+                homeCard.appendChild(priceElement);
+
+                homesContainer.appendChild(homeCard);
+            });
+        }
+
+        // Call the function on page load if user is authenticated
+        if (localStorage.getItem('token')) {
+            getAllHomes();
+        }
+
+        // Search functionality
+        document.getElementById('search-bar').addEventListener('input', function () {
+            const searchQuery = this.value.toLowerCase();
+            const filteredHomes = allHomes.filter(home => home.title.toLowerCase().includes(searchQuery));
+            displayAllHomes(filteredHomes); // Display filtered homes
+        });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
