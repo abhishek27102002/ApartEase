@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Vacation Rentals</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Vacation Rentals</div>
+        <div class="nav-links">
+            <button id="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Welcome to the Vacation Rentals Homepage!</h1>
+        <p>You are logged in. Enjoy exploring our vacation rentals.</p>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'login.html'; // Redirect to login if not logged in
+        }
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('token'); // Remove token from local storage
+            window.location.href = 'index.html'; // Redirect to login page
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
+
