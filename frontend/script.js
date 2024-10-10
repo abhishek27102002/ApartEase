@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            const response = await fetch('https://xenon-assignment.onrender.com/login', {
+            const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('password').value;
             const role = 'user'; // Default role is user
 
-            const response = await fetch('https://xenon-assignment.onrender.com/signup', {
+            const response = await fetch('http://localhost:3000/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password, role })
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const response = await fetch('https://xenon-assignment.onrender.com/add-home', {
+            const response = await fetch('http://localhost:3000/add-home', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -123,55 +123,55 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to get all homes
-    async function getAllHomes() {
-        try {
-            // Fetch all homes from the server
-            const response = await fetch('https://xenon-assignment.onrender.com/list-homes');
+    // async function getAllHomes() {
+    //     try {
+    //         // Fetch all homes from the server
+    //         const response = await fetch('http://localhost:3000/list-homes');
             
-            // Check if the response was successful
-            if (response.ok) {
-                const data = await response.json();
-                displayAllHomes(data); // Display all homes on the page
-            } else {
-                const errorData = await response.json();
-                alert(errorData.error);
-                window.location.href = 'homepage.html'; // Redirect to homepage on error
-            }
-        } catch (error) {
-            console.error('Error fetching homes:', error);
-            alert('Error fetching homes. Please try again.');
-        }
-    }
+    //         // Check if the response was successful
+    //         if (response.ok) {
+    //             const data = await response.json();
+    //             displayAllHomes(data); // Display all homes on the page
+    //         } else {
+    //             const errorData = await response.json();
+    //             alert(errorData.error);
+    //             window.location.href = 'homepage.html'; // Redirect to homepage on error
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching homes:', error);
+    //         alert('Error fetching homes. Please try again.');
+    //     }
+    // }
 
-    // Function to display all homes on the page
-    function displayAllHomes(homes) {
-        const homesContainer = document.getElementById('homes-container');
-        homesContainer.innerHTML = ''; // Clear the container
+    // // Function to display all homes on the page
+    // function displayAllHomes(homes) {
+    //     const homesContainer = document.getElementById('homes-container');
+    //     homesContainer.innerHTML = ''; // Clear the container
 
-        homes.forEach((home) => {
-            const homeCard = document.createElement('div');
-            homeCard.classList.add('home-card');
+    //     homes.forEach((home) => {
+    //         const homeCard = document.createElement('div');
+    //         homeCard.classList.add('home-card');
 
-            const titleElement = document.createElement('h2');
-            titleElement.textContent = home.title;
+    //         const titleElement = document.createElement('h2');
+    //         titleElement.textContent = home.title;
 
-            const descriptionElement = document.createElement('p');
-            descriptionElement.textContent = home.description;
+    //         const descriptionElement = document.createElement('p');
+    //         descriptionElement.textContent = home.description;
 
-            const priceElement = document.createElement('p');
-            priceElement.textContent = `Price: $${home.price}`;
+    //         const priceElement = document.createElement('p');
+    //         priceElement.textContent = `Price: $${home.price}`;
 
-            homeCard.appendChild(titleElement);
-            homeCard.appendChild(descriptionElement);
-            homeCard.appendChild(priceElement);
+    //         homeCard.appendChild(titleElement);
+    //         homeCard.appendChild(descriptionElement);
+    //         homeCard.appendChild(priceElement);
 
-            homesContainer.appendChild(homeCard);
-        });
-    }
+    //         homesContainer.appendChild(homeCard);
+    //     });
+    // }
 
-    // Call the function on page load
-    if (checkAuth()) {
-        getAllHomes();
-    }
+    // // Call the function on page load
+    // if (checkAuth()) {
+    //     getAllHomes();
+    // }
 
 });
