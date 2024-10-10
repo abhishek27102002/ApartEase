@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('https://xenon-assignment.onrender.com/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('password').value;
             const role = 'user'; // Default role is user
 
-            const response = await fetch('http://localhost:3000/signup', {
+            const response = await fetch('https://xenon-assignment.onrender.com/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password, role })
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const response = await fetch('http://localhost:3000/add-home', {
+            const response = await fetch('https://xenon-assignment.onrender.com/add-home', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
