@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Vacation Rentals</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        #homes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .home-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .home-card h2 {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .home-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .home-card .price {
+            font-size: 1.2rem;
+            color: #007BFF;;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -17,6 +54,17 @@
     <div class="content">
         <h1>Welcome to the Vacation Rentals Homepage!</h1>
         <p>You are logged in. Enjoy exploring our vacation rentals.</p>
+        
+        <!-- Container for displaying homes -->
+        <div id="homes-container">
+            <!-- Example card -->
+            <div class="home-card">
+                <img src="https://via.placeholder.com/300" alt="Home Image">
+                <h2>Beautiful Beach House</h2>
+                <p>Enjoy your stay at this beautiful beachfront property.</p>
+                <p class="price">$250 per night</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -35,4 +83,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
