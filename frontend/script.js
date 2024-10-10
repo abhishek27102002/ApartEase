@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('password').value;
             const role = 'user'; // Default role is user
 
-            const response = await fetch('http://localhost:3000/signup', {
+            const response = await fetch('https://xenon-assignment.onrender.com/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password, role })
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const response = await fetch('http://localhost:3000/add-home', {
+            const response = await fetch('https://xenon-assignment.onrender.com/add-home', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function getAllHomes() {
         try {
             // Fetch all homes from the server
-            const response = await fetch('http://localhost:3000/list-homes');
+            const response = await fetch('https://xenon-assignment.onrender.com/list-homes');
             
             // Check if the response was successful
             if (response.ok) {
